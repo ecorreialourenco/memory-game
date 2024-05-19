@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import clsx from "clsx";
+import cn from "classnames";
 import styles from "./Button.module.css";
 
 interface Button {
@@ -9,7 +9,7 @@ interface Button {
 }
 
 export const Button = ({ children, className, onClick }: Button) => (
-  <button className={clsx(styles.button, className)} onClick={onClick}>
+  <button className={cn(styles.button, className)} onClick={onClick}>
     {children}
   </button>
 );

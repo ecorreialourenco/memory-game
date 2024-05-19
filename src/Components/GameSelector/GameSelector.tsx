@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import clsx from "clsx";
+import cn from "classnames";
 import { GameContext } from "../../Context";
 import { Button, GameContainer } from "..";
 import { gameOptions } from "../../Utils/variables";
@@ -20,7 +20,7 @@ export const GameSelector = ({ onSelect }: GameSelectorProps) => {
         {gameOptions.map((option: GameType) => (
           <Button
             key={option.role}
-            className={clsx({ [styles.selected]: type === option.role })}
+            className={cn({ [styles.selected]: type === option.role })}
             onClick={() => setType(option.role)}
           >
             <div>
