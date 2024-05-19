@@ -19,6 +19,7 @@ export const GameSelector = ({ onSelect }: GameSelectorProps) => {
       <div className={styles.gameSelector}>
         {gameOptions.map((option: GameType) => (
           <Button
+            key={option.role}
             className={clsx({ [styles.selected]: type === option.role })}
             onClick={() => setType(option.role)}
           >
