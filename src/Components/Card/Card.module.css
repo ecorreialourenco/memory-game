@@ -1,5 +1,6 @@
 .face {
   height: 6rem;
+  width: 4.2rem;
 }
 
 .item .face {
@@ -15,11 +16,12 @@
 
 .back {
   height: 6rem;
-  width: 6rem;
-  background-color: rgb(253, 218, 175);
+  width: 4.2rem;
+  background-size: 100%;
+  background-position: bottom;
+  background-image: url(../../Assets/playing-card-background.jpeg);
   color: rgb(61, 21, 21);
   border: 1px solid black;
-  border-radius: 50%;
 }
 
 .item .back {

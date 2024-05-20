@@ -8,6 +8,7 @@ import {
 import { Button, Card, GameContainer } from "..";
 import { Item } from "../../Models";
 import { GameContext } from "../../Context";
+import LoadingImg from "../../Assets/loading.gif";
 
 import styles from "./GameBoard.module.css";
 import { gameOptions } from "../../Utils/variables";
@@ -17,6 +18,7 @@ interface GameBoardProps {
 }
 
 export const GameBoard = ({ onSelect }: GameBoardProps) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { type } = useContext(GameContext);
   const gameTypeRole = gameOptions.find((item) => item.role === type);
   const [cardsArray, setCardsArray] = useState<Item[]>([]);
@@ -40,6 +42,7 @@ export const GameBoard = ({ onSelect }: GameBoardProps) => {
   }, [type]);
 
   const NewGame = useCallback(() => {
+    setIsLoading(true);
     setTimeout(() => {
       const randomOrderArray: Item[] = gameData().sort(
         () => 0.5 - Math.random()
@@ -49,6 +52,7 @@ export const GameBoard = ({ onSelect }: GameBoardProps) => {
       setFirstCard(null);
       setSecondCard(null);
       setWon(0);
+      setIsLoading(false);
     }, 1200);
   }, [gameData]);
 
@@ -97,38 +101,53 @@ export const GameBoard = ({ onSelect }: GameBoardProps) => {
   return (
     <GameContainer>
       <div className={styles.container}>
-        <div
-          className={styles.board}
-          style={{
-            gridTemplateColumns: `repeat(${gameTypeRole?.column ?? 2}, 8rem)`,
-          }}
-        >
-          {cardsArray.map((item) => (
-            <Card
-              item={item}
-              key={item.id}
-              handleSelectedCards={handleSelectedCards}
-              toggled={
-                item === firstCard ||
-                item === secondCard ||
-                item.matched === true
-              }
-              stopflip={stopFlip}
-            />
-          ))}
-        </div>
-
-        <div className={styles.sidebar}>
-          <div className={styles.comments}>
-            {won !== cardsArray.length / 2 ? (
-              <span>Moves : {moves}</span>
-            ) : (
-              <span>You Won in {moves} moves</span>
-            )}
+        {isLoading ? (
+          <div className={styles.loadingContainer}>
+            <img src={LoadingImg} alt="loading..." />
           </div>
-          <Button onClick={NewGame}>New Game</Button>
-          <Button onClick={onSelect}>Difficulty change</Button>
-        </div>
+        ) : (
+          <>
+            <div className={styles.boardContainer}>
+              {won !== cardsArray.length / 2 && (
+                <div className={styles.moves}>
+                  <span>Moves : {moves}</span>
+                </div>
+              )}
+              <div
+                className={styles.board}
+                style={{
+                  gridTemplateColumns: `repeat(${
+                    gameTypeRole?.column ?? 2
+                  }, 8rem)`,
+                }}
+              >
+                {cardsArray.map((item) => (
+                  <Card
+                    item={item}
+                    key={item.id}
+                    handleSelectedCards={handleSelectedCards}
+                    toggled={
+                      item === firstCard ||
+                      item === secondCard ||
+                      item.matched === true
+                    }
+                    stopflip={stopFlip}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {won === cardsArray.length / 2 && (
+              <div className={styles.menu}>
+                <div className={styles.comments}>
+                  <span>You Won in {moves} moves</span>
+                </div>
+                <Button onClick={NewGame}>New Game</Button>
+                <Button onClick={onSelect}>Difficulty change</Button>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </GameContainer>
   );
