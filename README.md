@@ -8,12 +8,12 @@ This project implements a classic mini memory game using React, TypeScript, and 
 
 1. Clone the repository
 2. Run `npm install` to install the dependencies
-3. Run `npm start` to start the development server
+3. Run `npm run dev` to start the development server
 
 ## Testing
 
-- Run `npm test` to test the application
-- Run `npm test:coverage` to check the test coverage
+- Run `npm run test` to test the application
+- Run `npm run test:coverage` to check the test coverage
 
 ## Technologies Used
 
