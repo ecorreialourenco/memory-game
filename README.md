@@ -2,6 +2,8 @@
 
 This project implements a classic mini memory game using React, TypeScript, and Vite. The goal of the game is to find pairs of matching cards by memorizing their positions. The cards are shuffled and face down at the start of the game. The player clicks on a card to reveal it. If the revealed card matches the previously clicked card, the pair is removed from the game. The player wins when all pairs have been found.
 
+[Demo](https://ecorreialourenco.github.io/memory-game/)
+
 ## Installation
 
 1. Clone the repository
