@@ -7,7 +7,7 @@ export default {
   },
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
-    "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/__ mocks __/fileMock.ts",
+    "\\.(gif|ttf|eot|svg|png)$": "identity-obj-proxy",
     "\\.(css|less)$": "identity-obj-proxy",
   },
 };

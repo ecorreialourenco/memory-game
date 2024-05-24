@@ -30,8 +30,14 @@ export const Card = ({
   return (
     <div className={styles.item}>
       <div className={toggled ? styles.toggled : ""}>
-        <img className={styles.face} src={imgSrc} alt="face" />
+        <img
+          data-testid="card-img"
+          className={styles.face}
+          src={imgSrc}
+          alt="face"
+        />
         <button
+          data-testid="card-btn"
           className={styles.back}
           onClick={() => !stopflip && handleSelectedCards(item)}
         />
